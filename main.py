@@ -5,13 +5,18 @@ import random
 #Configurações do jogo
 num_linhas = 4
 num_colunas = 4
-cartao_size_weight = 10
-cartao_size_height = 10
-cores_cartao = ['red', 'blue', 'green', 'yellow', 'purble', 'orange', 'cyan', 'magenta']
+cartao_size_weight = 15
+cartao_size_height = 30
+cores_cartao = ['red', 'blue', 'green', 'yellow', 'purple', 'orange', 'cyan', 'magenta']
 cor_fundo = "#343a40"
 cor_letra = "#ffffff"
 font_style = ('Arial', 12, 'bold')
-max_tentativas= 10
+max_tentativas= 15
+
+#Interface Principal
+janela = tk.Tk()
+janela.title('Jogo da Memoria')
+janela.configure(bg=cor_fundo)
 
 #Cria uma grade aleatoria de cores para os cartoes
 def cria_card_grid():
@@ -35,11 +40,7 @@ def click(linha, coluna):
         cartao_revelado.append(cartao)
         if len(cartao_revelado) == 2:
             check_match()
-
-#Interface Principal
-janela = tk.Tk()
-janela.title('Jogo da Memoria')
-janela.configure(bg=cor_fundo)
+        
 
 #Cria grade cartoes
 grid = cria_card_grid()
@@ -67,13 +68,13 @@ janela.option_add('Button', button_style)
 def check_match():
     carta1, carta2 = cartao_revelado
     if carta1['bg'] == carta2['bg']:
-        carta1.after(1000,carta1.destroy)
-        carta2.after(1000,carta2.destroy)
+        carta1.after(2000,carta1.destroy)
+        carta2.after(2000,carta2.destroy)
         cartao_correspondentes.extend([carta1, carta2])
         check_win()
     else:
-        carta1.after(1000,lambda:carta1.config(bg='black'))
-        carta2.after(1000,lambda:carta2.config(bg='black'))
+        carta1.after(2000,lambda:carta1.config(bg='black'))
+        carta2.after(2000,lambda:carta2.config(bg='black'))
     cartao_revelado.clear()
     update_score()
     
@@ -91,7 +92,7 @@ def update_score():
     numero_tentativas +=1
     label_tentativas.config(text='Tentativas: {}/{}'.format(numero_tentativas,max_tentativas))
     if numero_tentativas >= max_tentativas:
-        messagebox.showinfo('Fim de Jogo, voce perdeu!!')
+        messagebox.showinfo('Fim de Jogo!', 'voce perdeu!')
         janela.quit()
         
 

@@ -13,11 +13,6 @@ cor_letra = "#ffffff"
 font_style = ('Arial', 12, 'bold')
 max_tentativas= 10
 
-#Interface Principal
-janela = tk.Tk()
-janela.title('Jogo da Memoria')
-janela.configure(bg=cor_fundo)
-
 #Cria uma grade aleatoria de cores para os cartoes
 def cria_card_grid():
     cores = cores_cartao * 2
@@ -40,7 +35,11 @@ def click(linha, coluna):
         cartao_revelado.append(cartao)
         if len(cartao_revelado) == 2:
             check_match()
-        
+
+#Interface Principal
+janela = tk.Tk()
+janela.title('Jogo da Memoria')
+janela.configure(bg=cor_fundo)
 
 #Cria grade cartoes
 grid = cria_card_grid()
